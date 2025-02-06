@@ -1,21 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=IM+Fell+English:ital@0;1&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  cursor: url('/images/fountain_pen_resized.png'), 32 32, auto;
+  @apply bg-parchment text-white;
+}
+
+h1 {
+  @apply font-display;
+}
+
+a {
+  @apply transition duration-200 ease-in-out;
+}
+
+a:hover {
+  text-shadow: 0 0 4px rgba(245, 158, 11, 0.5), 0 0 5px rgba(245, 158, 11, 0.5),
+    0 0 11px rgba(245, 158, 11, 0.5), 0 0 21px rgba(245, 158, 11, 0.5),
+    0 0 41px rgba(245, 158, 11, 0.5), 0 0 46px rgba(245, 158, 11, 0.5),
+    0 0 51px rgba(245, 158, 11, 0.5), 0 0 75px rgba(245, 158, 11, 0.5);
+}
+
+#background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; /* Ensure the video is behind other elements */
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(40, 42, 79, 0.25); /* 25% darker */
+  z-index: 0; /* Ensure the overlay is above the video */
+  pointer-events: none; /* Allow interactions to pass through */
+}
+
+.global-padding {
+  padding-left: 2rem; /* Add global left padding */
+  padding-right: 2rem; /* Add global right padding */
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 2px rgba(245, 158, 11, 0.3),
+      0 0 3px rgba(245, 158, 11, 0.3), 0 0 6px rgba(245, 158, 11, 0.3),
+      0 0 10px rgba(245, 158, 11, 0.3), 0 0 20px rgba(245, 158, 11, 0.3),
+      0 0 23px rgba(245, 158, 11, 0.3), 0 0 25px rgba(245, 158, 11, 0.3),
+      0 0 37px rgba(245, 158, 11, 0.3);
+  }
+  50% {
+    text-shadow: 0 0 5px rgba(245, 158, 11, 0.5),
+      0 0 10px rgba(245, 158, 11, 0.5), 0 0 15px rgba(245, 158, 11, 0.5),
+      0 0 20px rgba(245, 158, 11, 0.5), 0 0 25px rgba(245, 158, 11, 0.5),
+      0 0 30px rgba(245, 158, 11, 0.5), 0 0 35px rgba(245, 158, 11, 0.5),
+      0 0 40px rgba(245, 158, 11, 0.5);
+  }
+  100% {
+    text-shadow: 0 0 2px rgba(245, 158, 11, 0.3),
+      0 0 3px rgba(245, 158, 11, 0.3), 0 0 6px rgba(245, 158, 11, 0.3),
+      0 0 10px rgba(245, 158, 11, 0.3), 0 0 20px rgba(245, 158, 11, 0.3),
+      0 0 23px rgba(245, 158, 11, 0.3), 0 0 25px rgba(245, 158, 11, 0.3),
+      0 0 37px rgba(245, 158, 11, 0.3);
+  }
+}
+
+.logo {
+  animation: glow 2s infinite alternate;
+}
+
+.frame-container {
+  position: relative;
+  width: 600px; /* Set the desired width */
+  height: 600px; /* Set the desired height to match the frame */
+}
+
+.frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.album-image {
+  position: relative;
+  width: 52%;
+  height: 52%;
+  z-index: 1; /* Ensures the album image is under the frame overlay */
+}
+
+.frame-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/images/picture_frame_7.png');
+  background-size: cover;
+  background-position: center;
+  z-index: 2; /* Makes sure the frame overlays on top of the album image */
+  -webkit-filter: drop-shadow(12px 12px 25px rgba(0, 0, 0, 0.5));
+}
+
+.outline-text {
+  text-shadow: -1px -1px 0 #013c25, 1px -1px 0 #013c25, -1px 1px 0 #013c25,
+    1px 1px 0 #013c25;
+}
+
+.page-enter {
+  transform: translateX(100%);
+}
+
+.page-enter-active {
+  transform: translateX(0);
+  transition: transform 500ms ease-out;
+}
+
+.page-exit {
+  transform: translateX(0);
+}
+
+.page-exit-active {
+  transform: translateX(-100%);
+  transition: transform 500ms ease-in;
+}
+
+.picture-frame {
+  --border-width: 50px; /* Define border width as a CSS variable */
+
+  border-image-slice: 500 500 500 500; /* Adjusted from the image specifics */
+  border-image-width: 80px 80px 80px 80px; /* Larger border */
+  border-image-outset: 0px 0px 0px 0px; /* Adjust if you want it to extend beyond the element */
+  border-image-repeat: stretch stretch; /* Maintains proportions */
+  border-image-source: url('/images/picture_frame_2.png');
+
+  /* Without this, the border will not show */
+  border-style: solid;
+  border-width: var(--border-width); /* Increase this to scale the frame */
+  width: 1200px; /* Adjust element dimensions */
+  height: 675px;
+}
+
+@media (max-width: 767px) {
+  .picture-frame {
+    --border-width: 30px; /* Define border width as a CSS variable */
+
+    border-image-slice: 500 500 500 500; /* Adjusted from the image specifics */
+    border-image-width: 30px 30px 30px 30px; /* Smaller border for mobile */
+    border-image-outset: 0px 0px 0px 0px; /* Adjust if you want it to extend beyond the element */
+    border-image-repeat: stretch stretch; /* Maintains proportions */
+    border-image-source: url('/images/picture_frame_2.png');
+
+    /* Without this, the border will not show */
+    border-style: solid;
+    border-width: var(--border-width); /* Increase this to scale the frame */
+    width: 400px; /* Adjust element dimensions for mobile */
+    height: 225px; /* Maintain aspect ratio for mobile */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .picture-frame {
+    --border-width: 40px; /* Define border width as a CSS variable */
+
+    border-image-slice: 500 500 500 500; /* Adjusted from the image specifics */
+    border-image-width: 60px 60px 60px 60px; /* Medium border for tablets */
+    border-image-outset: 0px 0px 0px 0px; /* Adjust if you want it to extend beyond the element */
+    border-image-repeat: stretch stretch; /* Maintains proportions */
+    border-image-source: url('/images/picture_frame_2.png');
+
+    /* Without this, the border will not show */
+    border-style: solid;
+    border-width: var(--border-width); /* Increase this to scale the frame */
+    width: 900px; /* Adjust element dimensions for tablets */
+    height: 506px; /* Maintain aspect ratio for tablets */
+  }
+}
+
+.picture-frame-alt {
+  --border-width: 50px; /* Define border width as a CSS variable */
+
+  border-image-slice: 502 518 492 518; /* Adjusted from the image specifics */
+  border-image-width: 80px 80px 80px 80px; /* Larger border */
+  border-image-outset: 0px 0px 0px 0px; /* Adjust if you want it to extend beyond the element */
+  border-image-repeat: stretch stretch; /* Maintains proportions */
+  border-image-source: url('/images/picture_frame_3.png');
+
+  /* Without this, the border will not show */
+  border-style: solid;
+  border-width: var(--border-width); /* Increase this to scale the frame */
+  width: 600px; /* Adjust element dimensions */
+  height: 600px;
+
+  background-image: url('/images/andromeda_sinned_cover.jpeg');
+  background-size: calc(100% - var(--border-width))
+    calc(100% - var(--border-width));
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 767px) {
+  .picture-frame-alt {
+    --border-width: 50px; /* Define border width as a CSS variable */
+
+    border-image-slice: 502 518 492 518; /* Adjusted from the image specifics */
+    border-image-width: 50px 50px 50px 50px; /* Larger border */
+    border-image-outset: 0px 0px 0px 0px; /* Adjust if you want it to extend beyond the element */
+    border-image-repeat: stretch stretch; /* Maintains proportions */
+    border-image-source: url('/images/picture_frame_3.png');
+
+    /* Without this, the border will not show */
+    border-style: solid;
+    border-width: var(--border-width); /* Increase this to scale the frame */
+    width: 350px; /* Adjust element dimensions */
+    height: 350px;
+
+    background-image: url('/images/andromeda_sinned_cover.jpeg');
+    background-size: 250px;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+.scalloped-corners {
+  position: relative;
+  mask: radial-gradient(20px at 40px 40px, transparent 98%, #f59e0b) -40px -40px;
+  -webkit-mask: radial-gradient(20px at 40px 40px, transparent 98%, #f59e0b) -40px -40px;
+}
+.scalloped-corners::before {
+  content: '';
+  position: absolute;
+  top: 10px; /* Adjust to position the border inside */
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border: 2px dashed #f59e0b; /* Adjust the color and thickness of the border */
+  border-radius: 18px; /* Should align with the scalloped effect */
+  pointer-events: none; /* Ensure the border doesn't block interaction with the div */
+  mask: radial-gradient(20px at 40px 40px, transparent 98%, #f59e0b) -40px -40px;
+  -webkit-mask: radial-gradient(20px at 40px 40px, transparent 98%, #f59e0b) -40px -40px;
 }
