@@ -1,16 +1,9 @@
-import type { NextConfig } from 'next';
-
-const isProd = process.env.NODE_ENV === 'production';
-
-const nextConfig: NextConfig = {
-  /* config options here */
+const nextConfig = {
+  output: 'export', // REMOVE this if using Vercel
+  basePath: '', // REMOVE this if using Vercel
+  assetPrefix: '', // REMOVE this if using Vercel
 };
 
-module.exports = {
-  output: 'export', // Tells Next.js to generate static files
-  distDir: 'out',
-  basePath: '/si-belle-website', // Change this to match your repo name
-  assetPrefix: isProd ? '/si-belle-website/' : '',
-};
+module.exports = nextConfig;
 
 export default nextConfig;

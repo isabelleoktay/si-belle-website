@@ -5,7 +5,7 @@ import Header from '@/components/Header';
 
 export const metadata: Metadata = {
   title: 'Si Belle',
-  description: 'Explore the enchanting world of baroque pop music.',
+  description: 'Cut like a gilded blade.',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
