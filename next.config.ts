@@ -1,9 +1,5 @@
-const nextConfig = {
-  output: 'export', // REMOVE this if using Vercel
-  basePath: '', // REMOVE this if using Vercel
-  assetPrefix: '', // REMOVE this if using Vercel
-};
+import type { NextConfig } from 'next';
 
-module.exports = nextConfig;
+const nextConfig: NextConfig = {};
 
 export default nextConfig;
